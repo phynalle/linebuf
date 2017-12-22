@@ -1,0 +1,11 @@
+[package]
+name = "linebuf"
+version = "0.0.1"
+authors = ["phynalle <phynalism@gmail.com>"]
+description = "The library provides a interface to read a line through a fixed size of buffer"
+repository = "https://github.com/phynalle/linebuf"
+keywords = ["line", "reader"]
+license = "MIT"
+
+[dependencies]
+memchr = "2.0.1"

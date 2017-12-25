@@ -23,7 +23,7 @@ impl Line {
 
 pub struct LineReader<R> {
     inner: R,
-    buf: Vec<u8>,
+    buf: Box<[u8]>,
     pos: usize,
     cap: usize,
 }
@@ -34,15 +34,15 @@ impl<R: Read> LineReader<R> {
     }
 
     pub fn with_capacity(capacity: usize, inner: R) -> LineReader<R> {
-        let mut buf = Vec::with_capacity(capacity);
         unsafe {
+            let mut buf = Vec::with_capacity(capacity);
             buf.set_len(capacity);
-        }
-        LineReader {
-            inner,
-            buf,
-            pos: 0,
-            cap: 0,
+            LineReader {
+                inner,
+                buf: buf.into_boxed_slice(),
+                pos: 0,
+                cap: 0,
+            }
         }
     }
 
